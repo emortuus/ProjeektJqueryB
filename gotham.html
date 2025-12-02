@@ -10,17 +10,19 @@
 </head>
 <body>
 
+<!-- Navbar -->
 <div class="navbar">
     <a href="index.html">Strona główna</a>
     <a href="gotham.html">Gotham</a>
 </div>
 
-<div class="background-image"
-     style="background-image:url('tlo.jpg');">
-</div>
+<!-- Tło -->
+<div class="background-image" style="background-image:url('tlo.jpg');"></div>
 
+<!-- Tytuł mapy -->
 <div id="map-title" class="title">Mapa Gotham</div>
 
+<!-- Przyciski boczne -->
 <div id="left-buttons" class="side-buttons">
     <div class="side-button" data-gif="batman.gif"></div>
 </div>
@@ -28,9 +30,11 @@
     <div class="side-button" data-gif="batman.gif"></div>
 </div>
 
+<!-- Mapa -->
 <div id="map-wrapper">
     <img id="gotham-map" src="mapa.jpg" alt="Mapa Gotham">
 
+    <!-- Markery -->
     <div class="marker" style="top:15%; left:80%;" data-info="Wayne Manor – rezydencja rodziny Wayne."></div>
     <div class="marker" style="top:45%; left:60%;" data-info="Batcave – tajna baza Batmana pod Wayne Manor."></div>
     <div class="marker" style="top:30%; left:40%;" data-info="Arkham Asylum – zakład psychiatryczny dla przestępców."></div>
@@ -43,9 +47,11 @@
     <div class="marker" style="top:13%; left:40%;" data-info="Observatory – punkt widokowy i centrum badań."></div>
     <div class="marker" style="top:55%; left:50%;" data-info="Arkham City Streets – ulice pełne przestępców."></div>
 
+    <!-- Popup -->
     <div id="popup" class="info-popup"></div>
 </div>
 
+<!-- GIF overlay -->
 <div id="gif-overlay">
     <img src="" alt="Batman GIF">
 </div>
@@ -53,19 +59,19 @@
 <script>
 $(document).ready(function(){
 
+    // Animacja tytułu
     $("#map-title").css({opacity:0, marginLeft:"-100px"})
                    .animate({opacity:1, marginLeft:"0px"}, 2000);
 
+    // Kliknięcie markera - pokaz info
     $(".marker").click(function(){
         var text = $(this).data("info");
         var offset = $(this).position();
         var popup = $("#popup");
         var wrapper = $("#map-wrapper");
 
-        var popupWidth = popup.outerWidth();
-        var popupHeight = popup.outerHeight();
-        var top = Math.min(offset.top - 50, wrapper.height() - popupHeight - 10);
-        var left = Math.min(offset.left + 20, wrapper.width() - popupWidth - 10);
+        var top = Math.min(offset.top - 50, wrapper.height() - popup.outerHeight() - 10);
+        var left = Math.min(offset.left + 20, wrapper.width() - popup.outerWidth() - 10);
 
         popup.stop(true,true).html(text)
              .css({top: top, left: left})
@@ -74,12 +80,14 @@ $(document).ready(function(){
         setTimeout(function(){ popup.fadeOut(400); }, 5000);
     });
 
+    // Hover markerów
     $(".marker").hover(function(){
         $(this).css("box-shadow","0 0 15px yellow");
     }, function(){
         $(this).css("box-shadow","none");
     });
 
+    // Side button - GIF
     $(".side-button").click(function() {
         var gifUrl = $(this).data("gif");
         $("#gif-overlay img").attr("src", gifUrl);
