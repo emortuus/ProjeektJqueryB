@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Batman Universe</title>
+<link rel="icon" href="https://icon-library.com/images/batman-icon-png/batman-icon-png-23.jpg">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.html">Strona główna</a>
+    <a href="gotham.html">Gotham</a>
+</div>
+
+<div class="background-image"
+     style="background-image:url('https://images.wallpapersden.com/image/download/batman-emblem-over-dark-gotham-city_bmZtbGaUmZqaraWkpJRmbmdlrWZlbWU.jpg');">
+</div>
+
+<div class="section">
+    <h1 class="title">Uniwersum Batmana</h1>
+
+    <div class="panel">
+        <p>Gotham wciąż skrywa swoje sekrety, które tylko nieliczni odważni mogą odkryć. Miasto pełne jest ciemnych zakamarków, gdzie przestępczość czai się w cieniu, a bohaterowie muszą zachować czujność, aby chronić mieszkańców.</p>
+
+        <button id="btnExplore"></button>
+
+        <div id="extraInfo" class="panel">
+            <p>Batman to symbol determinacji i walki z chaosem. Jego działania chronią mieszkańców Gotham przed tymi, którzy chcą siać strach. Jego obecność daje nadzieję i bezpieczeństwo, a jego taktyka w walce z przestępczością jest niezrównana.  
+            W mieście pełnym zagrożeń każdy ruch Batmana jest starannie przemyślany, a jego planowanie strategiczne pozwala mu być zawsze krok przed przestępcami. Gotham potrzebuje bohatera, który nie boi się ciemności – a Batman jest tym, który niesie światło nadziei.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <h2 class="title">Główni bohaterowie</h2>
+
+    <div class="panel">
+        <div class="hero-card" data-info="Strażnik Gotham, który chroni miasto przed przestępcami, używając sprytu i technologii.">Batman</div>
+        <div class="hero-card" data-info="Chaos w czystej postaci, który wpada w szalone plany i zawsze pozostaje nieprzewidywalny.">Joker</div>
+        <div class="hero-card" data-info="Komisarz wierny sprawiedliwości, który stara się utrzymać porządek w mieście pełnym niebezpieczeństw.">Jim Gordon</div>
+        <div class="hero-card" data-info="Geniusz technologiczny, który dostarcza Batmana w nowoczesne gadżety i sprzęt do walki z przestępczością.">Lucius Fox</div>
+        <div class="hero-card" data-info="Dwie twarze w Gotham – Harvey Dent, który balansuje między praworządnością a chaosem, w wyniku własnej tragedii.">Two-Face</div>
+        <div class="hero-card" data-info="Młody bohater i pomocnik Batmana, który walczy o sprawiedliwość w Gotham, wnosząc nadzieję i energię.">Robin</div>
+    </div>
+
+    <div id="heroInfo" class="panel" style="display:none;"></div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    $(".title").each(function(i){
+        $(this).css({opacity:0, marginLeft:"-100px"})
+               .delay(i*300)
+               .animate({opacity:1, marginLeft:"0px"}, 1200);
+    });
+
+    $("#btnExplore").click(function() {
+        $("#extraInfo").slideToggle(600);
+    });
+
+    $(".hero-card").click(function(){
+        let info = $(this).data("info");
+        $("#heroInfo").hide()
+            .html(`<h3>${$(this).text()}</h3><p>${info}</p>`)
+            .fadeIn(400);
+    });
+
+    $(".hero-card").hover(function(){
+        $(this).css("box-shadow","0 0 20px #ffd700");
+    }, function(){
+        $(this).css("box-shadow","none");
+    });
+
+    setInterval(function(){
+        $("#btnExplore").fadeTo(1000,0.7).fadeTo(1000,1);
+    }, 2000);
+});
+</script>
+
+</body>
+</html>
